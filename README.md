@@ -5,7 +5,7 @@ Zero-dependency TypeScript utilities for parsing and processing LLM outputs.
 Works with OpenAI, Anthropic, and any other LLM provider.
 
 ```bash
-npm install llm-utils
+npm install @xdkoc/llm-utils
 ```
 
 ---
@@ -23,7 +23,7 @@ LLMs return messy text. You need JSON, but get markdown. You need clean output, 
 Extracts JSON from LLM output — works whether the model wrapped it in a code block or not.
 
 ```ts
-import { extractJson } from "llm-utils";
+import { extractJson } from "@xdkoc/llm-utils";
 
 // From a fenced code block
 extractJson('```json\n{"name": "Alice"}\n```');
@@ -49,7 +49,7 @@ extractJson("Sorry, I cannot help with that.");
 Extracts all fenced code blocks with their language tags.
 
 ```ts
-import { extractCodeBlocks } from "llm-utils";
+import { extractCodeBlocks } from "@xdkoc/llm-utils";
 
 const text = `
 Here is the solution:
@@ -76,7 +76,7 @@ extractCodeBlocks(text);
 Removes internal reasoning tags that some models include in their output (`<thinking>`, `<reasoning>`, `<scratchpad>`, `<inner_monologue>`).
 
 ```ts
-import { stripThinkingTags } from "llm-utils";
+import { stripThinkingTags } from "@xdkoc/llm-utils";
 
 stripThinkingTags(`
   <thinking>
@@ -94,7 +94,7 @@ stripThinkingTags(`
 Detects whether an LLM response was cut off mid-generation (e.g. due to max_tokens).
 
 ```ts
-import { isTruncated } from "llm-utils";
+import { isTruncated } from "@xdkoc/llm-utils";
 
 isTruncated("The answer is 42.");
 // → false
@@ -113,7 +113,7 @@ isTruncated("The main reason this works is bec");
 Unified parser for streaming responses from OpenAI and Anthropic. Returns a consistent `{ text, done }` shape regardless of provider.
 
 ```ts
-import { parseStreamChunk } from "llm-utils";
+import { parseStreamChunk } from "@xdkoc/llm-utils";
 
 // OpenAI chunk
 parseStreamChunk({ choices: [{ delta: { content: "Hello" }, finish_reason: null }] });
@@ -136,7 +136,7 @@ parseStreamChunk({ type: "message_stop" });
 ## Full example: streaming with unified output
 
 ```ts
-import { parseStreamChunk, isTruncated, extractJson } from "llm-utils";
+import { parseStreamChunk, isTruncated, extractJson } from "@xdkoc/llm-utils";
 
 let fullText = "";
 
